@@ -57,7 +57,7 @@ if __name__ == "__main__":
     imsize = im.shape
     count=0
     dct = dct(im, imsize)
-    print("Enter a threshold between 0 and 0.005 to obtain enough quality on resulting image.\n 0 to avoid thresholding \n Example: 0.005-0.012-0.1")
+    print("Enter a threshold between 0 and 1 .\n 0 to avoid thresholding \n Example: 0.005-0.012-0.1")
     thresh = input()
     while not thresh ==  '-1':
         dct_thresh = dct * (abs(dct) > (float(thresh)*np.max(dct)))
