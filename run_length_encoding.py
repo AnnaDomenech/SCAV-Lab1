@@ -1,29 +1,24 @@
 from collections import OrderedDict 
+
 def runLengthEncoding(input): 
   
-    # Generate ordered dictionary of all lower 
-    # case alphabets, its output will be  
-    # dict = {'w':0, 'a':0, 'd':0, 'e':0, 'x':0} 
+    # Generate ordered dictionary 
     dict=OrderedDict.fromkeys(input, 0) 
   
-    # Now iterate through input string to calculate  
-    # frequency of each character, its output will be  
-    # dict = {'w':4,'a':3,'d':1,'e':1,'x':6} 
+    # Iterate through input to calculate  
+    # frequency of each character
     for ch in input: 
         dict[ch] += 1
   
     # now iterate through dictionary to make  
-    # output string from (key,value) pairs 
+    # output as a set of (key,value) pairs 
     output = '' 
     for key,value in dict.items(): 
          output = output + key + str(value) 
     return output 
    
-# Driver function 
 if __name__ == "__main__": 
-    print('Enter the sequence of bits to encode:')
-    x = str(input())
+    x = str(input("Enter the sequence of bits to encode:"))#get sequence
     while not x =='c':
-        print ('The resulting encoded sequence is: ' + runLengthEncoding(x)) 
-        print('Enter the sequence of bits to encode or press c to exit')
-        x = str(input())
+        print ('The resulting encoded sequence is: ' + runLengthEncoding(x)) #apply run_length_encoding
+        x = str(input("Enter the sequence of bits to encode\n Press c to exit\n"))

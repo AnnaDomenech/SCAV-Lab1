@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+
+#iodir: input and output directory class
 class iodir:
     inp : str
     outp : str
@@ -9,24 +11,26 @@ class iodir:
 
 def setDir():
     name = "Lenna.jpg"
-    input_path= Path.cwd()
+    input_path= Path.cwd()#get current directory
+    #for each file in folder get input path (Lenna.jpg)
     file_path= [ subp for subp in input_path.iterdir() if subp.match(name)]
     file_path.sort()
-    output_path =  Path.cwd() / "Results"
-    output_path.mkdir(parents=True, exist_ok=True)
+    output_path =  Path.cwd() / "Results"#set output folder path 
+    output_path.mkdir(parents=True, exist_ok=True)# create it 
     return iodir(str(file_path[0].name),output_path)
 
 if __name__ == "__main__": 
-    dyr=setDir()
+    dyr=setDir()#set directories
     count=0
-    print("Enter compress ratio without %:")
-    aux = input()
-    while not aux =='c':
-        x = 100- int(aux)
-        output = str(dyr.outp / "Lenna_resize{:}.jpg".format(count))
-        command = f"ffmpeg -i {dyr.inp} -vf scale=iw*.{x}:ih*.{x} {output}"
-        os.system(command)
-        print("Enter compress ratio without %:")
-        print("Press c to exit")
-        aux = str(input())
+    aux = input("Enter compress ratio without %:")
+    while not aux == 'c':
+        if aux == '0':
+            print("with this compress ratio you will not apply resizing")
+        else:
+            x = 100 - int(aux)#Compression ratio of 25% == 0.75 * original size
+            output = str(dyr.outp / "Lenna_resize{:}.jpg".format(count))#set output image name
+            command = f"ffmpeg -i {dyr.inp} -vf scale=iw*.{x}:ih*.{x} {output}"#ffmpeg command
+            os.system(command)
+            
+        aux = input("Enter compress ratio without %\nPress c to exit:")
         count+=1
